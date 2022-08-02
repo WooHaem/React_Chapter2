@@ -20,7 +20,7 @@ function App() {
         </Container>
       </Navbar>
 
-      <div className='main-bg' style={{background: 'url(' + 메인이미지 + ')' }}></div>
+      <div className='main-bg' style={{background: 'url(' + 메인이미지 + ') center center no-repeat' }}></div>
       
       <Container>
         <Row>
