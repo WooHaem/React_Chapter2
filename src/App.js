@@ -25,8 +25,8 @@ function App() {
       <Container>
         <Row>
           <Col sm>상품</Col>
-          <Col sm>상품</Col>
-          <Col sm>상품</Col>
+          <Col sm>상품2</Col>
+          <Col sm>상품3</Col>
         </Row>
       </Container>
     </div>
