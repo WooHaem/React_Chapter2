@@ -32,6 +32,20 @@ function App() {
       <Container>
         <Row>
           <PrdList 데이터= {prd}/>
+
+          {/* 이렇게 사용해도 됨
+          {
+            prd.map((a, i) => {
+              return (
+                <Col sm key={i}>
+                  <img src={prd[i].img} width="100%" />
+                  <h4>{prd[i].title}</h4>
+                  <p>{prd[i].content}</p>
+                </Col>
+              );
+            })
+          } 
+          */}
         </Row>
       </Container>
     </div>
@@ -45,8 +59,12 @@ function PrdList(props) {
     props.데이터.map(function(a, i) {
       return (
         <Col sm key={i}>
-          {/* <img src={process.env.PUBLIC_URL + '/img' + (i + 1) + '.jpg'} width="100%" /> public 경로를 이용한 이미지 불러오기 */}
-          <img src={props.데이터[i].img} width="100%" /> {/* 데이터에 이미지 추가 */}
+          {/* (1) public 경로를 이용한 이미지 불러오기
+          <img src={process.env.PUBLIC_URL + '/img' + (i + 1) + '.jpg'} width="100%" /> */}
+
+          {/* (2) 데이터에 이미지 추가 */}
+          <img src={props.데이터[i].img} width="100%" />
+
           <h4>{props.데이터[i].title}</h4>
           <p>{props.데이터[i].content}</p>
         </Col>
