@@ -19,8 +19,8 @@ function App() {
           <Navbar.Brand href="#home">Wshop</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Cart</Nav.Link>
-            <Nav.Link href="#pricing">Board</Nav.Link>
+            <Nav.Link href="#features">버버리</Nav.Link>
+            <Nav.Link href="#pricing">아디다스</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
