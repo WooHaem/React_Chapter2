@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import 메인이미지 from "./img/main-bg.jpg";
 
@@ -8,11 +8,14 @@ import "./App.css";
 import data from "./data.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import { Directory, Event } from "./routes/sub.js";
+import { Directory, Event, Detail } from "./routes/sub.js";
+import axios from 'axios';
+import styled from "styled-components";
 
 function App() {
-  let [prd] = useState(data); // use... 들은 hook임.
+  let [prd, setPrd] = useState(data); // use... 들은 hook임.
   let navigate = useNavigate();
+
 
   return (
     <div className="App">
@@ -21,8 +24,8 @@ function App() {
           <Navbar.Brand href="#home">SAMPLE SHOP</Navbar.Brand>
           <Nav className="me-auto">
             <Link to="/">HOME</Link>
-            <Link to="/detail">DETAIL</Link>
-            <Link to="/sub">Event</Link>
+            <Link to="/list">LIST</Link>
+            <Link to="/sub">EVENT</Link>
             <Link to="/about">ABOUT</Link>
             <Link to="/directory">자료실</Link>
           </Nav>
@@ -47,17 +50,34 @@ function App() {
                   {/* (2)컴포넌트.map()을 외부에서 만들기 */}
                   <PrdList 데이터={prd} />
                 </Row>
+                <button onClick={()=> { 
+                  axios.get('https://codingapple1.github.io/shop/data2.json')
+                  .then((결과)=> {
+                    let copy = [...prd, ...결과.data];
+                    setPrd(copy);
+                    
+                  })
+                  .catch(()=> {
+                    console.log('실패함')
+                  })
+
+                  Promise.all([ axios.get('url1'), axios.get('url2')])  // 두개 이상의 ajax 데이터를 가져올 때
+                  .then(()=> {
+                  })
+
+                  // axios.post('/data', {name: 'kim'}) // 서버로 전송하기
+                 }}>더보기</button>
               </Container>
             </>
           }
         />
 
+        {/* (3)컴포넌트.map()을 내부에서 만들기 */}
         <Route
-          path="/detail"
+          path="/list"
           element={
             <>
               <div className="container">
-                {/* (3)컴포넌트.map()을 내부에서 만들기 */}
                 {prd.map((a, i) => {
                   return (
                     <div className="row" key={i}>
@@ -78,6 +98,8 @@ function App() {
           }
         />
 
+        <Route path="/list/:id" element={<Detail prd={prd} />} />
+
         <Route path="/directory" element={<Directory />} />
 
         <Route path="/about" element={<About />}>
@@ -97,6 +119,10 @@ function App() {
 }
 
 function About() {
+  useEffect(() => {
+    console.log("d");
+  });
+
   return (
     <div>
       <h4>
